@@ -25,16 +25,24 @@ public class UserList {
         }
     }
 
-
-    //TODO: implements this method to change user's password to newPassword by verified oldPassword
-    //TODO: return true if process is completed, otherwise return false
+    // Implements method to change user's password to newPassword by verifying oldPassword
+    // Returns true if process is completed, otherwise returns false
     public boolean changePassword(String username, String oldPassword, String newPassword) {
+        User user = findUserByUsername(username);
+        if (user != null && user.validatePassword(oldPassword)) {
+            user.setPassword(newPassword);
+            return true;
+        }
         return false;
     }
 
-    //TODO: implements this method to find user in users with valid password
-    //TODO: return User object if username and password is correct, otherwise return null
+    // Implements method to find user in users with valid password
+    // Returns User object if username and password are correct, otherwise returns null
     public User login(String username, String password) {
+        User user = findUserByUsername(username);
+        if (user != null && user.validatePassword(password)) {
+            return user;
+        }
         return null;
     }
 }
